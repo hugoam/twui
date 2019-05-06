@@ -1,0 +1,3 @@
+[submodule "two"]
+	path = two
+	url = https://github.com/hugoam/two

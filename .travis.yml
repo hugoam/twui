@@ -1,0 +1,34 @@
+language: cpp
+
+addons:
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+    packages:
+      - gcc-8
+      - g++-8
+      - xorg-dev
+
+dist: xenial
+
+matrix:
+  include:
+    - os: linux
+      compiler: gcc
+    - os: linux
+      compiler: clang
+    - os: osx
+      compiler: clang
+      osx_image: xcode10
+
+install:
+  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then export GENIE_FOLDER="linux"; fi
+  - if [ "$CXX" = "g++" ]; then export TOOLCHAIN="linux-gcc-8" GMAKE_FOLDER="gmake-linux"; fi
+  - if [ "$CXX" = "clang++" ]; then export TOOLCHAIN="linux-clang" GMAKE_FOLDER="gmake-linux-clang"; fi
+
+  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then export GENIE_FOLDER="darwin" TOOLCHAIN="osx" GMAKE_FOLDER="gmake-osx"; fi
+  
+script:
+  - bin/$GENIE_FOLDER/genie --compile-only --gcc=$TOOLCHAIN gmake
+  - cd build/projects/$GMAKE_FOLDER
+  - time make config=debug64 toy
