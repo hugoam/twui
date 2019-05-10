@@ -1,4 +1,4 @@
-# [twui](https://github.com/hugoam/tgfx)
+![libtwui](media/libtwui.png?raw=true)
 
 twui is a fully auto-layout, stylable, declarative/immediate mode UI, with a large set of widgets, docking, tabs, nodes, text editors, inputs, curves etc.  
 it is part of the encompassing [two](https://github.com/hugoam/two) library 
